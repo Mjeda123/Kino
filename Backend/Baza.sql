@@ -1,14 +1,14 @@
-use master;
-go 
-
-drop database if exists kinowp6;
-go
-
-create database kinowp6 collate Croatian_CI_AS;
-go 
-
-use kinowp6;
-go
+SELECT name, collation_name FROM sys.databases;
+GO
+ALTER DATABASE db_ab2785_kino SET SINGLE_USER WITH
+ROLLBACK IMMEDIATE;
+GO
+ALTER DATABASE db_ab2785_kino COLLATE Croatian_CI_AS;
+GO
+ALTER DATABASE db_ab2785_kino SET MULTI_USER;
+GO
+SELECT name, collation_name FROM sys.databases;
+GO
 
 
 create table dvorane(
