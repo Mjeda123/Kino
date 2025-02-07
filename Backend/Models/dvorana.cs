@@ -1,6 +1,6 @@
 ﻿namespace Backend.Models
 {
-    public class dvorana : Entitet
+    public class Dvorana : Entitet
     {
         internal static readonly string Naziv;
 
