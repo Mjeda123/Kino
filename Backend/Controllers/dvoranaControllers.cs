@@ -6,11 +6,11 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class dvoranaControllers : ControllerBase
+    public class DvoranaController : ControllerBase
     {
         private readonly EdunovaContext _context;
 
-        public dvoranaControllers(EdunovaContext context)
+        public DvoranaController(EdunovaContext context)
         {
             _context = context;
         }
