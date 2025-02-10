@@ -6,6 +6,7 @@ import NavBarEdunova from './components/NavBarEdunova'
 import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constans'
 import Pocetna from './pages/pocetna'
+import DvoranePregled from './pages/dvorane/DvoranePregled'
 
 function App() {
   
@@ -16,7 +17,7 @@ function App() {
         <NavBarEdunova />
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
-          <Route path={RouteNames.SMJER_PREGLEDA} element={<}
+          <Route path={RouteNames.SMJER_PREGLEDA} element={<DvoranePregled />} />
 
 
 

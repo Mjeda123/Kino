@@ -49,7 +49,7 @@ namespace Backend.Controllers
 
         [HttpPost]
 
-        public IActionResult Post(dvorana dvorane)
+        public IActionResult Post(Dvorana dvorane)
         {
                 try
                 {
@@ -66,7 +66,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, dvorana dvorane)
+        public IActionResult Put(int sifra, Dvorana dvorane)
         {
                 try
                 {
@@ -79,7 +79,7 @@ namespace Backend.Controllers
                     }
 
                 // Rucno mapiranje, kasnije automapper
-                s.naziv = dvorana.Naziv;
+                s.naziv = Dvorana.Naziv;
 
                     _context.dvorane.Update(s);
                     _context.SaveChanges();
