@@ -10,6 +10,6 @@ namespace Backend.Data
 
         }
 
-        public DbSet<dvorana> dvorane { get; set; }
+        public DbSet<Dvorana> dvorane { get; set; }
     }
 }
