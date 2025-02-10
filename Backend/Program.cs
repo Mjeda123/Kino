@@ -1,4 +1,4 @@
-using Backend.Data;
+﻿using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +13,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<EdunovaContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"));
+});
+
+builder.Services.AddCors(o => {
+
+    o.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+
 });
 
 var app = builder.Build();
@@ -32,6 +41,8 @@ app.UseSwaggerUI(o => {
     o.EnableTryItOutByDefault();
     o.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
 });
+
+app.UseCors("CorsPolicy");
 
 app.MapControllers();
 
