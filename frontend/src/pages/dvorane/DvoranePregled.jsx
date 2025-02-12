@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import DvoraneService from "../../services/DvoraneService"
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { RouteNames } from "../../constans";
 
 
 
@@ -22,6 +24,10 @@ export default function DvoranePregled()
     return(
 
         <>
+        <Link
+        to={RouteNames.DVORANE_NOVI}
+        className="btn btn-success siroko"
+        >Dodaj novu dvoranu</Link>
         <Table striped bordered hover responsive>
             <thead>
                 <tr>

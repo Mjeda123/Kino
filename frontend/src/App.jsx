@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constans'
 import Pocetna from './pages/pocetna'
 import DvoranePregled from './pages/dvorane/DvoranePregled'
+import DvoraneDodaj from './pages/dvorane/DvoraneDodaj'
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.DVORANE_PREGLED} element={<DvoranePregled />} />
+          <Route path={RouteNames.DVORANE_NOVI} element={<DvoraneDodaj />} />
 
 
 

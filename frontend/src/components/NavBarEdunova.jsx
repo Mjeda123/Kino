@@ -23,12 +23,13 @@ export default function NavBarEdunova(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             
-            <NavDropdown title="Dvorane" id="basic-nav-dropdown">
+            <NavDropdown title="Programi" id="basic-nav-dropdown">
               <NavDropdown.Item
               onClick={()=>navigate(RouteNames.DVORANE_PREGLED)}
               >Dvorane</NavDropdown.Item>
               
             </NavDropdown>
+            <Nav.Link href='https://mjeda123-001-site1.jtempurl.com/swagger' target='_blank'>Swagger</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
