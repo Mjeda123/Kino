@@ -17,7 +17,7 @@ function App() {
         <NavBarEdunova />
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
-          <Route path={RouteNames.SMJER_PREGLEDA} element={<DvoranePregled />} />
+          <Route path={RouteNames.DVORANE_PREGLED} element={<DvoranePregled />} />
 
 
 

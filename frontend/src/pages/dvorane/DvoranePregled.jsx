@@ -29,10 +29,10 @@ export default function DvoranePregled()
                 </tr>
             </thead>
             <tbody>
-                {dvorane && dvorane.map((dvorane,index)=>(
+                {dvorane && dvorane.map((dvorana,index)=>(
                     <tr key={index}>
                         <td>
-                            {dvorane.naziv}
+                            {dvorana.naziv}
                         </td>
                     </tr>
                 ))}
