@@ -4,6 +4,6 @@
     {
         
 
-        public string naziv { get; set; } = "";
+        public string Naziv { get; set; } = "";
     }
 }

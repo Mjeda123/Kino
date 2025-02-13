@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { RouteNames } from '../constans';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -24,10 +25,11 @@ export default function NavBarEdunova(){
             
             <NavDropdown title="Programi" id="basic-nav-dropdown">
               <NavDropdown.Item
-              onClick={()=>navigate(RouteNames.SMJER_PREGLEDA)}
-              >Smjerovi</NavDropdown.Item>
+              onClick={()=>navigate(RouteNames.DVORANE_PREGLED)}
+              >Dvorane</NavDropdown.Item>
               
             </NavDropdown>
+            <Nav.Link href='https://mjeda123-001-site1.jtempurl.com/swagger' target='_blank'>Swagger</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

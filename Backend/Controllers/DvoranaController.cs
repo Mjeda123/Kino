@@ -20,7 +20,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(_context.dvorane);
+                return Ok(_context.Dvorane);
             }
             catch (Exception e)
             {
@@ -34,7 +34,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var s = _context.dvorane.Find(sifra);
+                var s = _context.Dvorane.Find(sifra);
                 if (s == null)
                 {
                     return NotFound();
@@ -53,7 +53,7 @@ namespace Backend.Controllers
         {
                 try
                 {
-                    _context.dvorane.Add(dvorane);
+                    _context.Dvorane.Add(dvorane);
                     _context.SaveChanges();
                     return StatusCode(StatusCodes.Status201Created, dvorane);
                 }
@@ -66,12 +66,12 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Dvorana dvorane)
+        public IActionResult Put(int sifra, Dvorana dvorana)
         {
                 try
                 {
 
-                    var s = _context.dvorane.Find(sifra);
+                    var s = _context.Dvorane.Find(sifra);
 
                     if (s == null)
                     {
@@ -79,9 +79,9 @@ namespace Backend.Controllers
                     }
 
                 // Rucno mapiranje, kasnije automapper
-                s.naziv = Dvorana.Naziv;
+                s.Naziv = dvorana.Naziv;
 
-                    _context.dvorane.Update(s);
+                    _context.Dvorane.Update(s);
                     _context.SaveChanges();
                     return Ok(new { poruka = "Uspješno promijenjeno" });
                 }
@@ -91,6 +91,27 @@ namespace Backend.Controllers
                 }
         }
 
+        [HttpDelete]
+        [Route("{sifra:int}")]
+        public IActionResult Delete(int sifra)
+        {
+            try
+            {
+                var s = _context.Dvorane.Find(sifra);
+                if (s == null)
+                {
+                    return NotFound();
+                }
+                _context.Dvorane.Remove(s);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno obrisano" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
+
+    }
     }
 
