@@ -3,7 +3,8 @@ export const RouteNames={
     HOME: '/',
 
     DVORANE_PREGLED: '/dvorane',
-    DVORANE_NOVI: '/dvorane/dodaj'
+    DVORANE_NOVI: '/dvorane/dodaj',
+    DVORANE_PROMJENA: '/dvorane/:sifra'
 
 
 

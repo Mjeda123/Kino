@@ -10,6 +10,15 @@ async function get() {
     .catch((e)=>{})
 }
 
+async function getBySifra(sifra) {
+    return await HttpService.get('/Dvorana' + sifra)
+    .then((odgovor)=>{
+        //console.table(odgovor.data)
+        return odgovor.data;
+    })
+    .catch((e)=>{})
+}
+
 async function dodaj(dvorana) {
     return HttpService.post('/Dvorana',dvorana)
     .then(()=>{return {greska: false, poruka: 'Dodano'}})
@@ -18,5 +27,6 @@ async function dodaj(dvorana) {
 
 export default{
     get,
+    getBySifra,
     dodaj
 }

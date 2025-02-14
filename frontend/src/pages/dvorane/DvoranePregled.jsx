@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import DvoraneService from "../../services/DvoraneService"
-import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Table } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constans";
 
 
@@ -10,6 +10,7 @@ export default function DvoranePregled()
 {
 
     const[dvorane, setDvorane] = useState();
+    const Navigate = useNavigate();
 
     async function dohvatiDvorane() {
         const odgovor = await DvoraneService.get()
@@ -32,6 +33,7 @@ export default function DvoranePregled()
             <thead>
                 <tr>
                     <th>Naziv</th>
+                    <th>Akcija</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +41,11 @@ export default function DvoranePregled()
                     <tr key={index}>
                         <td>
                             {dvorana.naziv}
+                        </td>
+                        <td>
+                            <Button
+                            onClick={()=>Navigate(`/dvorane/${dvorane.sifra}`)}
+                            >Promjena</Button>
                         </td>
                     </tr>
                 ))}

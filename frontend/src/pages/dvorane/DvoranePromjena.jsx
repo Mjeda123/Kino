@@ -1,15 +1,27 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constans";
 import DvoraneService from "../../services/DvoraneService";
+import { useEffect, useState } from "react";
 
 
-export default function DvoraneDodaj(){
+export default function DvoranePromjena(){
 
     const Navigate = useNavigate();
+    const [dvorana,setDvorane] = useState({});
+    const routeParams = useParams();
+
+    async function dohvatiDvorane() {
+        const odgovor = await DvoraneService.getBySifra(routeParams.sifra)
+        setDvorane(odgovor)
+    }
+
+    useEffect(()=>{
+        dohvatiDvorane();
+    },[])
 
     async function dodaj(dvorana) {
-        const odgovor = await DvoraneService.dodaj(dvorana);
+        const odgovor = DvoraneService.dodaj(dvorana);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -44,7 +56,8 @@ export default function DvoraneDodaj(){
 
         <Form.Group controlId="naziv">
             <Form.Label>Naziv</Form.Label>
-            <Form.Control type="text" name="naziv" required />
+            <Form.Control type="text" name="naziv" required
+            defaultValue={dvorana.naziv}/>
         </Form.Group>
 
         <hr />

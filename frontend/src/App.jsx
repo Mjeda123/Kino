@@ -8,6 +8,7 @@ import { RouteNames } from './constans'
 import Pocetna from './pages/pocetna'
 import DvoranePregled from './pages/dvorane/DvoranePregled'
 import DvoraneDodaj from './pages/dvorane/DvoraneDodaj'
+import DvoranePromjena from './pages/dvorane/DvoranePromjena'
 
 function App() {
   
@@ -20,9 +21,10 @@ function App() {
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.DVORANE_PREGLED} element={<DvoranePregled />} />
           <Route path={RouteNames.DVORANE_NOVI} element={<DvoraneDodaj />} />
+          <Route path={RouteNames.DVORANE_PROMJENA} element={<DvoranePromjena />} />
 
 
-
+         
         </Routes>
 
         <hr />
