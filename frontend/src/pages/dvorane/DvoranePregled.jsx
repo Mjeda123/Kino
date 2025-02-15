@@ -44,7 +44,7 @@ export default function DvoranePregled()
                         </td>
                         <td>
                             <Button
-                            onClick={()=>Navigate(`/dvorane/${dvorane.sifra}`)}
+                            onClick={()=>Navigate(`/dvorane/${dvorana.sifra}`)}
                             >Promjena</Button>
                         </td>
                     </tr>

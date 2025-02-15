@@ -8,12 +8,12 @@ import { useEffect, useState } from "react";
 export default function DvoranePromjena(){
 
     const Navigate = useNavigate();
-    const [dvorana,setDvorane] = useState({});
+    const [dvorana,setDvorana] = useState({});
     const routeParams = useParams();
 
     async function dohvatiDvorane() {
         const odgovor = await DvoraneService.getBySifra(routeParams.sifra)
-        setDvorane(odgovor)
+        setDvorana(odgovor)
     }
 
     useEffect(()=>{
