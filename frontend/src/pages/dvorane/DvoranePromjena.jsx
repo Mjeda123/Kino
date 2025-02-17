@@ -20,8 +20,8 @@ export default function DvoranePromjena(){
         dohvatiDvorane();
     },[])
 
-    async function dodaj(dvorana) {
-        const odgovor = DvoraneService.dodaj(dvorana);
+    async function promjena(dvorana) {
+        const odgovor = await DvoraneService.promjena(routeParams.sifra,dvorana);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -37,7 +37,7 @@ export default function DvoranePromjena(){
 
         let podaci = new FormData(e.target);
 
-        dodaj(
+        promjena(
             {
   
                 naziv: podaci.get('naziv')
@@ -51,7 +51,7 @@ export default function DvoranePromjena(){
 
     return(
     <>
-    Dodavanje smjera
+    Promjena dvorane
     <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="naziv">
@@ -71,7 +71,7 @@ export default function DvoranePromjena(){
            </Col>
            <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
               <Button variant="success" type="submit" className="siroko">
-                Dodaj dvoranu
+                Promjeni dvoranu
               </Button>
            </Col>
         </Row>

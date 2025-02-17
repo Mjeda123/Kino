@@ -25,8 +25,22 @@ async function dodaj(dvorana) {
     .catch(()=>{return {greska: true, poruka: 'Problem kod dodavanja'}})
 }
 
+async function promjena(sifra,dvorana) {
+    return HttpService.put('/Dvorana/'+sifra,dvorana)
+    .then(()=>{return {greska: false, poruka: 'Promjenjeno'}})
+    .catch(()=>{return {greska: true, poruka: 'Problem kod promjene'}})
+}
+
+async function obrisi(sifra) {
+    return HttpService.delete('/Dvorana/'+sifra)
+    .then(()=>{return {greska: false, poruka: 'Obrisano'}})
+    .catch(()=>{return {greska: true, poruka: 'Problem kod brisanje'}})
+}
+
 export default{
     get,
     getBySifra,
-    dodaj
+    dodaj,
+    promjena,
+    obrisi
 }

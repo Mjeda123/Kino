@@ -21,6 +21,22 @@ export default function DvoranePregled()
         dohvatiDvorane();
     },[])
 
+    function obrisi(sifra){
+        if(!confirm('Sigurno obrisati')){
+            return;
+        }
+        brisanjeDvorane(sifra);
+    }
+
+    async function brisanjeDvorane(sifra) {
+        const odgovor = await DvoraneService.obrisi(sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        dohvatiDvorane();
+    }
+
 
     return(
 
@@ -46,6 +62,11 @@ export default function DvoranePregled()
                             <Button
                             onClick={()=>Navigate(`/dvorane/${dvorana.sifra}`)}
                             >Promjena</Button>
+                            &nbsp;&nbsp;&nbsp;
+                            <Button
+                            variant="danger"
+                            onClick={()=>obrisi(dvorana.sifra)}
+                            >Obriši</Button>
                         </td>
                     </tr>
                 ))}
