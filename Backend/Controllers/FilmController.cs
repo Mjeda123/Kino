@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("api/v2/[controller]")]
+    [Route("api/v1/[controller]")]
     public class FilmController : ControllerBase
     {
         private readonly EdunovaContext _context;
@@ -54,13 +54,63 @@ namespace Backend.Controllers
         }
         [HttpPost]
 
-        public IActionResult Post(Film film)
+        public IActionResult Post(Film filmovi)
         {
             try
             {
-                _context.Dvorane.Add(film);
+                _context.Film.Add(filmovi);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, film);
+                return StatusCode(StatusCodes.Status201Created, filmovi);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("{sifra:int}")]
+        [Produces("application/json")]
+        public IActionResult Put(int sifra, Film film)
+        {
+            try
+            {
+
+                var s = _context.Film.Find(sifra);
+
+                if (s == null)
+                {
+                    return NotFound();
+                }
+
+                // Rucno mapiranje, kasnije automapper
+                s.Naziv = film.Naziv;
+                s.Zanr = film.Zanr;
+
+                _context.Film.Update(s);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno promijenjeno" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{sifra:int}")]
+        public IActionResult Delete(int sifra)
+        {
+            try
+            {
+                var s = _context.Film.Find(sifra);
+                if (s == null)
+                {
+                    return NotFound();
+                }
+                _context.Film.Remove(s);
+                _context.SaveChanges();
+                return Ok(new { poruka = "Uspješno obrisano" });
             }
             catch (Exception e)
             {
@@ -69,4 +119,4 @@ namespace Backend.Controllers
         }
     }
     }
-}
+

@@ -4,6 +4,6 @@
     {
         public string Naziv { get; set; } = "";
 
-        public string Zanr { get; set; }
+        public string? Zanr { get; set; }
     }
 }
