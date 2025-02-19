@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-using Backend.Data;
+﻿using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +20,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(_context.Film);
+                return Ok(_context.Filmovi);
             }
             catch (Exception e)  
             {
@@ -40,7 +35,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var s = _context.Film.Find(sifra);
+                var s = _context.Filmovi.Find(sifra);
                 if (s == null)
                 {
                     return NotFound();
@@ -58,7 +53,7 @@ namespace Backend.Controllers
         {
             try
             {
-                _context.Film.Add(filmovi);
+                _context.Filmovi.Add(filmovi);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created, filmovi);
             }
@@ -76,7 +71,7 @@ namespace Backend.Controllers
             try
             {
 
-                var s = _context.Film.Find(sifra);
+                var s = _context.Filmovi.Find(sifra);
 
                 if (s == null)
                 {
@@ -87,7 +82,7 @@ namespace Backend.Controllers
                 s.Naziv = filmovi.Naziv;
                 s.Zanr = filmovi.Zanr;
 
-                _context.Film.Update(s);
+                _context.Filmovi.Update(s);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno promijenjeno" });
             }
@@ -103,12 +98,12 @@ namespace Backend.Controllers
         {
             try
             {
-                var s = _context.Film.Find(sifra);
+                var s = _context.Filmovi.Find(sifra);
                 if (s == null)
                 {
                     return NotFound();
                 }
-                _context.Film.Remove(s);
+                _context.Filmovi.Remove(s);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }

@@ -16,17 +16,17 @@ sifra int not null primary key identity(1,1),
 naziv varchar(50) not null
 );
 
-create table film(
+create table filmovi(
 sifra int not null primary key identity(1,1),
 naziv varchar(50) not null,
 zanr varchar(50)
 );
 
-create table projekcija(
+create table projekcije(
 sifra int not null primary key identity(1,1),
-film int not null references film(sifra),
+film int not null references filmovi(sifra),
 termin datetime not null,
-dvorane int not null references dvorane(sifra),
+dvorana int not null references dvorane(sifra),
 );
 
 create table gledatelji(
@@ -38,8 +38,8 @@ prezime varchar(50) not null
 create table karte(
 sifra int not null primary key identity(1,1),
 cijena decimal(18,2) not null,
-gledatelji int not null references gledatelji(sifra),
-projekcija int not null references projekcija(sifra)
+gledatelj int not null references gledatelji(sifra),
+projekcija int not null references projekcije(sifra)
 );
 
 insert into dvorane (naziv)
@@ -48,7 +48,7 @@ values ('A'),
 ('C'),
 ('D');
 
-insert into film (naziv, zanr)
+insert into filmovi (naziv, zanr)
 values ('Proslava','Drama'),
 ('Dražen','Drama'),
 ('Divlj Robot','Animirani'),
@@ -60,7 +60,7 @@ values ('Proslava','Drama'),
 ('Canary black','Akcijski'),
 ('Gladiator 2','Akcijski');
 
-insert into projekcija (film, termin, dvorane)
+insert into projekcije (film, termin, dvorana)
 values (1,'2024-11-26 18:25',1),
 (1,'2024-11-27 18:25',1),
 (2,'2024-11-28 16:25',2),
@@ -95,7 +95,7 @@ values ('Ivan','Iviæ'),
 ('Dominik','Šariæ'),
 ('Ana','Horvat');
 
-insert into karte (cijena, gledatelji, projekcija)
+insert into karte (cijena, gledatelj, projekcija)
 values (15,1,1),
 (15,1,2),
 (15,2,2),

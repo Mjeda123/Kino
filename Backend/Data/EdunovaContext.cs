@@ -12,7 +12,7 @@ namespace Backend.Data
 
         public DbSet<Dvorana> Dvorane { get; set; }
 
-        public DbSet<Film> Film { get; set; }
+        public DbSet<Film> Filmovi { get; set; }
 
     }
 }
