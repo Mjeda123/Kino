@@ -71,7 +71,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Film film)
+        public IActionResult Put(int sifra, Film filmovi)
         {
             try
             {
@@ -84,8 +84,8 @@ namespace Backend.Controllers
                 }
 
                 // Rucno mapiranje, kasnije automapper
-                s.Naziv = film.Naziv;
-                s.Zanr = film.Zanr;
+                s.Naziv = filmovi.Naziv;
+                s.Zanr = filmovi.Zanr;
 
                 _context.Film.Update(s);
                 _context.SaveChanges();

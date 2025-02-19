@@ -1,4 +1,4 @@
-import { HttpService } from "./Httpservice";
+/*import { HttpService } from "./Httpservice";
 
 
 async function get() {
@@ -43,4 +43,4 @@ export default{
     dodaj,
     promjena,
     obrisi
-}
+}*/
