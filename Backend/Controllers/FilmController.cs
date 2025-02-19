@@ -54,13 +54,13 @@ namespace Backend.Controllers
         }
         [HttpPost]
 
-        public IActionResult Post(Film filmovi)
+        public IActionResult Post(Film film)
         {
             try
             {
-                _context.Film.Add(filmovi);
+                _context.Film.Add(film);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, filmovi);
+                return StatusCode(StatusCodes.Status201Created, film);
             }
             catch (Exception e)
             {
