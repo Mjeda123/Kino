@@ -42,6 +42,11 @@ export default function FilmoviDodaj(){
                 <Form.Label>Naziv</Form.Label>
                 <Form.Control type="text" name="naziv" required />
             </Form.Group>
+
+            <Form.Group controlId="zanr">
+                <Form.Label>Zanr</Form.Label>
+                <Form.Control type="text" name="zanr"  />
+            </Form.Group>
     
             <hr />
     

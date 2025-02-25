@@ -58,7 +58,7 @@ export default function FilmoviPromjena(){
             <Form.Group controlId='zanr'>
                 <Form.Label>Zanr</Form.Label>
                 <Form.Control type="text" name="zanr" 
-                defaultValue={film.naziv}/>
+                defaultValue={film.zanr}/>
             </Form.Group>
         
 
