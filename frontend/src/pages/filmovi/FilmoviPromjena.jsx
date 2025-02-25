@@ -38,7 +38,7 @@ export default function FilmoviPromjena(){
 
         promjena(
             {
-                naziv: podaci.get('naziv')
+                naziv: podaci.get('naziv'),
                 zanr: podaci.get('zanr')
             }
         )

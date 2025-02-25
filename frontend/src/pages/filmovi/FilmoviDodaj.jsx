@@ -26,7 +26,7 @@ export default function FilmoviDodaj(){
 
         dodaj(
             {
-                naziv: podaci.get('naziv')
+                naziv: podaci.get('naziv'),
                 zanr: podaci.get('zanr')
             }
         )
