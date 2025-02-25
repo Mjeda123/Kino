@@ -27,8 +27,13 @@ export default function NavBarEdunova(){
               <NavDropdown.Item
               onClick={()=>navigate(RouteNames.DVORANE_PREGLED)}
               >Dvorane</NavDropdown.Item>
+              <NavDropdown.Item
+              onClick={()=>navigate(RouteNames.FILMOVI_PREGLED)}
+              >Filmovi</NavDropdown.Item>
               
             </NavDropdown>
+
+            
             <Nav.Link href='https://mjeda123-001-site1.jtempurl.com/swagger' target='_blank'>Swagger</Nav.Link>
           </Nav>
         </Navbar.Collapse>

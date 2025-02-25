@@ -9,6 +9,9 @@ import Pocetna from './pages/pocetna'
 import DvoranePregled from './pages/dvorane/DvoranePregled'
 import DvoraneDodaj from './pages/dvorane/DvoraneDodaj'
 import DvoranePromjena from './pages/dvorane/DvoranePromjena'
+import FilmoviPregled from './pages/filmovi/FilmoviPregled'
+import FilmoviDodaj from './pages/filmovi/FilmoviDodaj'
+import FilmoviPromjena from './pages/filmovi/FilmoviPromjena'
 
 function App() {
   
@@ -22,6 +25,9 @@ function App() {
           <Route path={RouteNames.DVORANE_PREGLED} element={<DvoranePregled />} />
           <Route path={RouteNames.DVORANE_NOVI} element={<DvoraneDodaj />} />
           <Route path={RouteNames.DVORANE_PROMJENA} element={<DvoranePromjena />} />
+          <Route path={RouteNames.FILMOVI_PREGLED} element={<FilmoviPregled />} />
+          <Route path={RouteNames.FILMOVI_NOVI} element={<FilmoviDodaj />} />
+          <Route path={RouteNames.FILMOVI_PROMJENA} element={<FilmoviPromjena />} />
 
 
          
