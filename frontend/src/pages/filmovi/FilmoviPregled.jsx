@@ -57,10 +57,10 @@ export default function FilmoviPregled()
                 {filmovi && filmovi.map((film,index)=>(
                     <tr key={index}>
                         <td>
-                            {filmovi.naziv}
+                            {film.naziv}
                         </td>
                         <td>
-                            {filmovi.zanr}
+                            {film.zanr}
                         </td>
                         <td>
                             <Button

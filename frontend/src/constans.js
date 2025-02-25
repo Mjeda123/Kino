@@ -6,7 +6,8 @@ export const RouteNames={
     DVORANE_NOVI: '/dvorane/dodaj',
     DVORANE_PROMJENA: '/dvorane/:sifra',
     FILMOVI_PREGLED: '/filmovi',
-    FILMOVI_NOVI: '/filmovi/dodaj'
+    FILMOVI_NOVI: '/filmovi/dodaj',
+    FILMOVI_PROMJENA: '/filmovi/:sifra'
 
 
 

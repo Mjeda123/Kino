@@ -39,7 +39,7 @@ export default function DvoraneDodaj(){
 
     return(
     <>
-    Dodavanje smjera
+    Dodavanje dvorane 
     <Form onSubmit={odradiSubmit}>
 
         <Form.Group controlId="naziv">
