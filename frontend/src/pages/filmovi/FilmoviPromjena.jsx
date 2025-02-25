@@ -23,7 +23,7 @@ export default function FilmoviPromjena(){
     },[])
 
     async function promjena(film) {
-        const odgovor = await FilmoviService.promjena(routeParams.sifra,naziv,zanr);
+        const odgovor = await FilmoviService.promjena(routeParams.sifra,film);
         if(odgovor.greska){
             alert(odgovor.poruka)
             return
