@@ -14,5 +14,7 @@ namespace Backend.Data
 
         public DbSet<Film> Filmovi { get; set; }
 
+        public DbSet<Gledatelj> Gledatelji { get; set; }
+
     }
 }
