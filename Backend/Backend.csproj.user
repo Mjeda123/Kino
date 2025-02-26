@@ -4,4 +4,7 @@
     <ActiveDebugProfile>https</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>C:\Users\Polaznik\Documents\GitHub\Kino\Backend\Properties\PublishProfiles\mjeda123-001-site1 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>
