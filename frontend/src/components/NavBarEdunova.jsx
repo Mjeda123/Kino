@@ -30,6 +30,9 @@ export default function NavBarEdunova(){
               <NavDropdown.Item
               onClick={()=>navigate(RouteNames.FILMOVI_PREGLED)}
               >Filmovi</NavDropdown.Item>
+              <NavDropdown.Item
+              onClick={()=>navigate(RouteNames.GLEDATELJI_PREGLED)}
+              >Gledatelji</NavDropdown.Item>
               
             </NavDropdown>
 

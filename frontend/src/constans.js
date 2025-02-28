@@ -7,7 +7,10 @@ export const RouteNames={
     DVORANE_PROMJENA: '/dvorane/:sifra',
     FILMOVI_PREGLED: '/filmovi',
     FILMOVI_NOVI: '/filmovi/dodaj',
-    FILMOVI_PROMJENA: '/filmovi/:sifra'
+    FILMOVI_PROMJENA: '/filmovi/:sifra',
+    GLEDATELJI_PREGLED: '/gledatelji',
+    GLEDATELJI_NOVI: '/gledatelji/dodaj',
+    GLEDATELJI_PROMJENA: '/gledatelji/:sifra'
 
 
 

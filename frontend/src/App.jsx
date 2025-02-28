@@ -12,6 +12,9 @@ import DvoranePromjena from './pages/dvorane/DvoranePromjena'
 import FilmoviPregled from './pages/filmovi/FilmoviPregled'
 import FilmoviDodaj from './pages/filmovi/FilmoviDodaj'
 import FilmoviPromjena from './pages/filmovi/FilmoviPromjena'
+import GledateljiPregled from './pages/gledatelji/GledateljiPregled'
+import GledateljiDodaj from './pages/gledatelji/GledateljiDodaj'
+import GledateljiPromjena from './pages/gledatelji/GledateljiPromjena'
 
 function App() {
   
@@ -28,6 +31,9 @@ function App() {
           <Route path={RouteNames.FILMOVI_PREGLED} element={<FilmoviPregled />} />
           <Route path={RouteNames.FILMOVI_NOVI} element={<FilmoviDodaj />} />
           <Route path={RouteNames.FILMOVI_PROMJENA} element={<FilmoviPromjena />} />
+          <Route path={RouteNames.GLEDATELJI_PREGLED} element={<GledateljiPregled />} />
+          <Route path={RouteNames.GLEDATELJI_NOVI} element={<GledateljiDodaj />} />
+          <Route path={RouteNames.GLEDATELJI_PROMJENA} element={<GledateljiPromjena />} />
 
 
          
