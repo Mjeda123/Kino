@@ -14,6 +14,10 @@ namespace Backend.Mapping
             CreateMap<FilmDTOInsertUpdate, Film>();
             CreateMap<Film, FilmDTOInsertUpdate>();
 
+            CreateMap<Dvorana, DvoranaDTORead>();
+            CreateMap<DvoranaDTOInsertUpdate, Dvorana>();
+            CreateMap<Dvorana, DvoranaDTOInsertUpdate>();
+
             CreateMap<Gledatelj, GledateljDTORead>()
               .ConstructUsing(entitet =>
                new GledateljDTORead(
@@ -25,7 +29,7 @@ namespace Backend.Mapping
 
             CreateMap<Projekcija, ProjekcijaDTORead>()
                .ForCtorParam(
-                   "FilmSifra",
+                   "FilmNaziv",
                    opt => opt.MapFrom(src => src.Film.Naziv)
                );
             CreateMap<Projekcija, ProjekcijaDTOInsertUpdate>().ForMember(
