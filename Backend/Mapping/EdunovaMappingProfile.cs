@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Backend.Models;
 using Backend.Models.DTO;
-using System.Text.RegularExpressions;
 
 namespace Backend.Mapping
 {
@@ -20,8 +19,7 @@ namespace Backend.Mapping
                new GledateljDTORead(
                   entitet.Sifra,
                   entitet.Ime ?? "",
-                  entitet.Prezime ?? "",
-                  PutanjaDatoteke(entitet)));
+                  entitet.Prezime ?? ""));
             CreateMap<GledateljDTOInsertUpdate, Gledatelj>();
             CreateMap<Gledatelj, GledateljDTOInsertUpdate>();
 
