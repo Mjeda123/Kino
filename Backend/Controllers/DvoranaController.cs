@@ -1,114 +1,149 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class DvoranaController : ControllerBase
+    public class DvoranaController(EdunovaContext context, IMapper mapper) : EdunovaController(context, mapper)
     {
-        private readonly EdunovaContext _context;
-
-        public DvoranaController(EdunovaContext context)
-        {
-            _context = context;
-        }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<DvoranaDTORead>> Get()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                return Ok(_context.Dvorane);
+                return Ok(_mapper.Map<List<DvoranaDTORead>>(_contex.Dvorane));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
+        public ActionResult<List<DvoranaDTOInsertUpdate> GetBySifra(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Dvorana? e;
             try
             {
-                var s = _context.Dvorane.Find(sifra);
-                if (s == null)
-                {
-                    return NotFound();
-                }
-                return Ok(s);
+                e = _contex.Dvorane.Find(sifra);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+
+                return BadRequest(new { poruka = ex.Message });
             }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Dvorana ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<DvoranaDTOInsertUpdate>(e));
         }
 
         [HttpPost]
 
-        public IActionResult Post(Dvorana dvorane)
+        public IActionResult Post(DvoranaDTOInsertUpdate dto)
         {
-                try
-                {
-                    _context.Dvorane.Add(dvorane);
-                    _context.SaveChanges();
-                    return StatusCode(StatusCodes.Status201Created, dvorane);
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e);
-                }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                var e = _mapper.Map<Dvorana>(dto);
+                _contex.Dvorane.Add(e);
+                _contex.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<DvoranaDTORead>(e));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Dvorana dvorana)
+        public IActionResult Put(int sifra, DvoranaDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                Dvorana? e;
                 try
                 {
-
-                    var s = _context.Dvorane.Find(sifra);
-
-                    if (s == null)
-                    {
-                        return NotFound();
-                    }
-
-                // Rucno mapiranje, kasnije automapper
-                s.Naziv = dvorana.Naziv;
-
-                    _context.Dvorane.Update(s);
-                    _context.SaveChanges();
-                    return Ok(new { poruka = "Uspješno promijenjeno" });
+                    e = _contex.Dvorane.Find(sifra);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    return BadRequest(e);
+                    return BadRequest(new { poruka = ex.Message });
                 }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Dvorana ne postoji u bazi" });
+                }
+
+                e = _mapper.Map(dto, e);
+
+                _contex.Dvorane.Update(e);
+                _contex.SaveChanges();
+
+                return Ok(new { poruka = "Uspješno promjenjeno" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
         }
 
         [HttpDelete]
         [Route("{sifra:int}")]
         public IActionResult Delete(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var s = _context.Dvorane.Find(sifra);
-                if (s == null)
+                Dvorana? e;
+                try
                 {
-                    return NotFound();
+                    e = _contex.Dvorane.Find(sifra);
                 }
-                _context.Dvorane.Remove(s);
-                _context.SaveChanges();
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Dvorana ne postoji u bazi");
+                }
+                _contex.Dvorane.Remove(e);
+                _contex.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 

@@ -1,94 +1,116 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class GledateljController : ControllerBase
+    public class GledateljController(EdunovaContext context, IMapper mapper) : EdunovaController(context, mapper)
     {
-        private readonly EdunovaContext _context;
-
-        public GledateljController(EdunovaContext context)
-        {
-            _context = context;
-        }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<GledateljDTORead>> Get()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                return Ok(_context.Gledatelji);
+                return Ok(_mapper.Map<List<GledateljDTORead>>(_contex.Gledatelji));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
+        public ActionResult<GledateljDTOInsertUpdate> GetBySifra(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Gledatelj? e;
             try
             {
-                var s = _context.Gledatelji.Find(sifra);
-                if (s == null)
-                {
-                    return NotFound();
-                }
-                return Ok(s);
+                e = _contex.Gledatelji.Find(sifra);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Gledatelj ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<GledateljDTOInsertUpdate>(e));
         }
 
         [HttpPost]
-        public IActionResult Post(Gledatelj gledatelji)
+        public IActionResult Post(GledateljDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                _context.Gledatelji.Add(gledatelji);
-                _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, gledatelji);
+                var e = _mapper.Map<Gledatelj>(dto);
+                _contex.Gledatelji.Add(e);
+                _contex.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<GledateljDTORead>(e));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Gledatelj gledatelji)
+        public IActionResult Put(int sifra, GledateljDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var s = _context.Gledatelji.Find(sifra);
-                if(s == null)
+                Gledatelj? e;
+                try
                 {
-                    return NotFound();
+                    e = _contex.Gledatelji.Find(sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Gledatelj ne postoji u bazi" });
                 }
 
-                // Rucno mapiranje, kasnije automapper
-                s.Ime = gledatelji.Ime;
-                s.Prezime = gledatelji.Prezime;
+                e = _mapper.Map(dto, e);
 
-                _context.Gledatelji.Update(s);
-                _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno promijenjeno" });
+                _contex.Gledatelji.Update(e);
+                _contex.SaveChanges();
+
+                return Ok(new { poruka = "Uspješno promjenjeno" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
@@ -96,20 +118,32 @@ namespace Backend.Controllers
         [Route("{sifra:int}")]
         public IActionResult Delete(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var s = _context.Gledatelji.Find(sifra);
-                if (s == null)
+                Gledatelj? e;
+                try
                 {
-                    return NotFound();
+                    e = _contex.Gledatelji.Find(sifra);
                 }
-                _context.Gledatelji.Remove(s);
-                _context.SaveChanges();
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Gledatelj ne postoji u bazi");
+                }
+                _contex.Gledatelji.Remove(e);
+                _contex.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
     }

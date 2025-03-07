@@ -1,94 +1,115 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class FilmController : ControllerBase
+    public class FilmController(EdunovaContext context, IMapper mapper) : EdunovaController(context, mapper)
     {
-        private readonly EdunovaContext _context;
-
-        public FilmController(EdunovaContext context)   
-        {
-            _context = context;
-        }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<FilmDTORead>> Get()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                return Ok(_context.Filmovi);
+                return Ok(_mapper.Map<List<FilmDTORead>>(_contex.Filmovi));
             }
-            catch (Exception e)  
+            catch (Exception ex)
             {
-
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
+        public ActionResult<FilmDTOInsertUpdate> GetBySifra(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            Film? e;
             try
             {
-                var s = _context.Filmovi.Find(sifra);
-                if (s == null)
-                {
-                    return NotFound();
-                }
-                return Ok(s);
+                e = _contex.Filmovi.Find(sifra);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+
+                return BadRequest(new { poruka = ex.Message });
             }
+            if (e == null)
+            {
+                return NotFound(new { poruka = "Film ne postoji u bazi" });
+            }
+
+            return Ok(_mapper.Map<FilmDTOInsertUpdate>(e));
         }
         [HttpPost]
 
-        public IActionResult Post(Film filmovi)
+        public IActionResult Post(FilmDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                _context.Filmovi.Add(filmovi);
-                _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, filmovi);
+                var e = _mapper.Map<Film>(dto);
+                _contex.Filmovi.Add(e);
+                _contex.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<FilmDTORead>(e));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Film filmovi)
+        public IActionResult Put(int sifra, FilmDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-
-                var s = _context.Filmovi.Find(sifra);
-
-                if (s == null)
+                Film? e;
+                try
                 {
-                    return NotFound();
+                    e = _contex.Filmovi.Find(sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Film ne postoji u bazi" });
                 }
 
-                // Rucno mapiranje, kasnije automapper
-                s.Naziv = filmovi.Naziv;
-                s.Zanr = filmovi.Zanr;
+                e = _mapper.Map(dto, e);
 
-                _context.Filmovi.Update(s);
-                _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno promijenjeno" });
+                _contex.Filmovi.Update(e);
+                _contex.SaveChanges();
+
+                return Ok(new { poruka = "Uspješno promjenjeno" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
@@ -96,20 +117,32 @@ namespace Backend.Controllers
         [Route("{sifra:int}")]
         public IActionResult Delete(int sifra)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var s = _context.Filmovi.Find(sifra);
-                if (s == null)
+                Film? e;
+                try
                 {
-                    return NotFound();
+                    e = _contex.Filmovi.Find(sifra);
                 }
-                _context.Filmovi.Remove(s);
-                _context.SaveChanges();
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound("Film ne postoji u bazi");
+                }
+                _contex.Filmovi.Remove(e);
+                _contex.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
     }
