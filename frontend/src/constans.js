@@ -10,7 +10,14 @@ export const RouteNames={
     FILMOVI_PROMJENA: '/filmovi/:sifra',
     GLEDATELJI_PREGLED: '/gledatelji',
     GLEDATELJI_NOVI: '/gledatelji/dodaj',
-    GLEDATELJI_PROMJENA: '/gledatelji/:sifra'
+    GLEDATELJI_PROMJENA: '/gledatelji/:sifra',
+    PROJEKCIJE_PREGLED: '/projekcije',
+    PROJEKCIJE_NOVI: '/projekcije/dodaj',
+    PROJEKCIJE_PROMJENA: '/projekcije/:sifra',
+
+    LOGIN: '/login',
+    NADZORNA_PLOCA: '/nadzornaploca',
+    ERA: '/era'
 
 
 

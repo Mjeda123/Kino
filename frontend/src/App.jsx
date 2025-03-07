@@ -15,16 +15,35 @@ import FilmoviPromjena from './pages/filmovi/FilmoviPromjena'
 import GledateljiPregled from './pages/gledatelji/GledateljiPregled'
 import GledateljiDodaj from './pages/gledatelji/GledateljiDodaj'
 import GledateljiPromjena from './pages/gledatelji/GledateljiPromjena'
+import ProjekcijePregled from './pages/projekcije/ProjekcijePregled'
 
 function App() {
   
+  const { isLoggedIn } = useAuth();
+  const { errors, prikaziErrorModal, sakrijError } = useError();
+
+  function godina(){
+    const pocenta = 2024;
+    const trenutna = new Date().getFullYear();
+    if(pocenta===trenutna){
+      return trenutna;
+    }
+    return pocenta + ' - ' + trenutna;
+  }
 
   return (
     <>
-      <Container>
+    <LoadingSpinner />
+    <ErrorModal show={prikaziErrorModal} errors={errors} onHide={sakrijError} />
+      <Container className='aplikacija'>
         <NavBarEdunova />
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
+          {isLoggedIn ? (
+        <>
+        <Route path={RouteNames.NADZORNA_PLOCA} element={<NadzornaPloca />} />
+
+
           <Route path={RouteNames.DVORANE_PREGLED} element={<DvoranePregled />} />
           <Route path={RouteNames.DVORANE_NOVI} element={<DvoraneDodaj />} />
           <Route path={RouteNames.DVORANE_PROMJENA} element={<DvoranePromjena />} />
@@ -34,6 +53,17 @@ function App() {
           <Route path={RouteNames.GLEDATELJI_PREGLED} element={<GledateljiPregled />} />
           <Route path={RouteNames.GLEDATELJI_NOVI} element={<GledateljiDodaj />} />
           <Route path={RouteNames.GLEDATELJI_PROMJENA} element={<GledateljiPromjena />} />
+          <Route path={RouteNames.PROJEKCIJE_PREGLED} element={<ProjekcijePregled />} />
+          <Route path={RouteNames.PROJEKCIJE_NOVI} element={<ProjekcijeDodaj />} />
+
+          <Route path={RouteNames.ERA} element={<EraDijagram />} /> 
+
+          </>
+        ) : (
+          <>
+            <Route path={RouteNames.LOGIN} element={<Login />} />
+          </>
+        )}
 
 
          
