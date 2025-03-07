@@ -22,7 +22,12 @@ namespace Backend.Controllers
             }
             try
             {
-                return Ok(_mapper.Map<List<ProjekcijaDTORead>>(_contex.Projekcije.Include(g => g.Film)));
+                return Ok(_mapper.Map<List<ProjekcijaDTORead>>(
+                    _contex.Projekcije
+                    .Include(g => g.Film)
+                    .Include(g => g.Dvorana)
+                    )
+                    );
             }
             catch (Exception ex)
             {
