@@ -30,7 +30,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{sifra:int}")]
-        public ActionResult<List<DvoranaDTOInsertUpdate> GetBySifra(int sifra)
+        public ActionResult<DvoranaDTOInsertUpdate> GetBySifra(int sifra)
         {
             if (!ModelState.IsValid)
             {

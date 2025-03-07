@@ -20,8 +20,7 @@ namespace Backend.Mapping
                new GledateljDTORead(
                   entitet.Sifra,
                   entitet.Ime ?? "",
-                  entitet.Prezime ?? "",
-                  PutanjaDatoteke(entitet)));
+                  entitet.Prezime ?? ""));
             CreateMap<GledateljDTOInsertUpdate, Gledatelj>();
             CreateMap<Gledatelj, GledateljDTOInsertUpdate>();
 
