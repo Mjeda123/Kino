@@ -13,6 +13,7 @@
     "axios": "^1.8.2",
     "bootstrap": "^5.3.3",
     "countup": "^1.8.2",
+    "countup.js": "^2.8.0",
     "highcharts": "^12.1.2",
     "highcharts-react-official": "^3.2.1",
     "moment": "^2.30.1",
@@ -38,5 +39,10 @@
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "vite": "^6.1.0"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

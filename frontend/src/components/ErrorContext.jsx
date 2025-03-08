@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { createContext } from "react";
 
 
+
 export const ErrorContext = createContext();
 
 export const ErrorProvider = ({ children }) => {
@@ -27,6 +28,6 @@ export const ErrorProvider = ({ children }) => {
   );
 };
 
-ErrorProvide.propTypes = {
+ErrorProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
