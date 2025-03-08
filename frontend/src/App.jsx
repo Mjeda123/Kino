@@ -16,6 +16,10 @@ import GledateljiPregled from './pages/gledatelji/GledateljiPregled'
 import GledateljiDodaj from './pages/gledatelji/GledateljiDodaj'
 import GledateljiPromjena from './pages/gledatelji/GledateljiPromjena'
 import ProjekcijePregled from './pages/projekcije/ProjekcijePregled'
+import ProjekcijeDodaj from './pages/projekcije/ProjekcijeDodaj'
+import ProjekcijePromjena from './pages/projekcije/ProjekcijePromjena'
+import useError from './hooks/useError'
+import EraDijagram from './pages/EraDijagram'
 
 function App() {
   
@@ -55,6 +59,7 @@ function App() {
           <Route path={RouteNames.GLEDATELJI_PROMJENA} element={<GledateljiPromjena />} />
           <Route path={RouteNames.PROJEKCIJE_PREGLED} element={<ProjekcijePregled />} />
           <Route path={RouteNames.PROJEKCIJE_NOVI} element={<ProjekcijeDodaj />} />
+          <Route path={RouteNames.PROJEKCIJE_PROMJENA} element={<ProjekcijePromjena />} />
 
           <Route path={RouteNames.ERA} element={<EraDijagram />} /> 
 
@@ -70,7 +75,7 @@ function App() {
         </Routes>
 
         <hr />
-        &copy; Kino 2025
+        &copy; Kino {godina()}
       </Container>
       
     </>

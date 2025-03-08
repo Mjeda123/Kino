@@ -8,14 +8,23 @@ import { RouteNames } from "../../constans";
 
 export default function DvoranePregled()
 {
+    const { showLoading, hideLoading } = useLoading();
+    const { prikaziError } = useError();
 
     const[dvorane, setDvorane] = useState();
     const Navigate = useNavigate();
 
     async function dohvatiDvorane() {
+        showLoading();
         const odgovor = await DvoraneService.get()
-        setDvorane(odgovor)
+        hideLoading();
+        if(odgovor.greska){
+            prikaziError(odgovor.poruka)
+            return
+        }
+        setDvorane(odgovor.poruka)
     }
+    
 
     useEffect(()=>{
         dohvatiDvorane();
@@ -29,13 +38,17 @@ export default function DvoranePregled()
     }
 
     async function brisanjeDvorane(sifra) {
+        showLoading();
         const odgovor = await DvoraneService.obrisi(sifra);
+        hideLoading();
         if(odgovor.greska){
-            alert(odgovor.poruka);
+            prikaziError(odgovor.poruka)
             return;
         }
         dohvatiDvorane();
+        
     }
+    
 
 
     return(
@@ -58,6 +71,7 @@ export default function DvoranePregled()
                         <td>
                             {dvorana.naziv}
                         </td>
+                        
                         <td>
                             <Button
                             onClick={()=>Navigate(`/dvorane/${dvorana.sifra}`)}
