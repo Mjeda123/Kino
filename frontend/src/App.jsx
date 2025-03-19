@@ -20,6 +20,7 @@ import ProjekcijeDodaj from './pages/projekcije/ProjekcijeDodaj'
 import ProjekcijePromjena from './pages/projekcije/ProjekcijePromjena'
 import useError from './hooks/useError'
 import EraDijagram from './pages/EraDijagram'
+import ErrorModal from './components/ErrorModal'
 
 function App() {
   
